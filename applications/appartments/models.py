@@ -9,3 +9,4 @@ User = get_user_model()
 # Здесь какое то изминения которое будет добавлена в master
 
 
+# this changes added Munara
