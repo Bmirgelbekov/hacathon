@@ -10,3 +10,7 @@ User = get_user_model()
 
 
 # this changes added Munara
+
+# git add . 
+# git commit -m "comment"
+# git push origin munara
