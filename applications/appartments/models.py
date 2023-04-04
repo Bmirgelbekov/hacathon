@@ -6,3 +6,6 @@ User = get_user_model()
 
 # class Apartments(models.Model):
 
+# Здесь какое то изминения которое будет добавлена в master
+
+
