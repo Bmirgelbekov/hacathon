@@ -47,7 +47,6 @@ INSTALLED_APPS = [
 
     # my apps
     'applications.users',
-    'applications.appartments',
 
 ]
 

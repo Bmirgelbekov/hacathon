@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class AppartmentsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'applications.appartments'
+    name = 'appartments'
