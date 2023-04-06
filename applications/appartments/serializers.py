@@ -40,3 +40,6 @@ class AppartmentSerializer(serializers.ModelSerializer):
 #             'updated_at', 'sub_comment', 'appartment'
 #         )
 #         read_only_fields = ['appartment']
+
+
+'test'
