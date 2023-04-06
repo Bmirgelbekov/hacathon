@@ -43,3 +43,5 @@ class AppartmentSerializer(serializers.ModelSerializer):
 
 
 'test'
+
+# новый коммитаоо
