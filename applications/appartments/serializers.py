@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Appartment #Comment
+from .models import Appartment #, Comment
  
 
 class AppartmentListSerializer(serializers.ListSerializer):

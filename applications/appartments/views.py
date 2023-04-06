@@ -1,10 +1,11 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
+from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import Appartment #, Comment
-from .serializers import AppartmentSerializer, AppartmentListSerializer #, CommentSerializer
+from .serializers import AppartmentSerializer, AppartmentListSerializer#, CommentSerializer
 from .permissions import IsAuthor
 
 class AppartmentViewSet(ModelViewSet):
