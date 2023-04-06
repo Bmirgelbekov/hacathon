@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Appartment #Comment
+from .models import Appartment #, Comment
  
 
 class AppartmentListSerializer(serializers.ListSerializer):
@@ -40,3 +40,8 @@ class AppartmentSerializer(serializers.ModelSerializer):
 #             'updated_at', 'sub_comment', 'appartment'
 #         )
 #         read_only_fields = ['appartment']
+
+
+'test'
+
+# новый коммитаоо
