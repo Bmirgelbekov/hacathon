@@ -8,11 +8,15 @@ from .models import Appartment #, Comment
 from .serializers import AppartmentSerializer, AppartmentListSerializer#, CommentSerializer
 from .permissions import IsAuthor
 
+from django.views.decorators.cache import  cache_page
+
+
 class AppartmentViewSet(ModelViewSet):
     queryset = Appartment.objects.all()
     serializer_class = AppartmentSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['rooms']
+
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
