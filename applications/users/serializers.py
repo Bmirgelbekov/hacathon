@@ -69,12 +69,20 @@ class LoginSerializer(serializers.Serializer):
                                 password=password,
                                 request=request)
             if not user:
-                raise serializers.ValidationError('Неправильно указан логин или пароль')
+                raise serializers.ValidationError(
+                    'Неправильно указан логин или пароль'
+                    )
         else:
-            raise serializers.ValidationError('Логин и пароль обязательны к заполнению')
+            raise serializers.ValidationError(
+                'Логин и пароль обязательны к заполнению'
+                )
         attrs['user'] = user
         return attrs
     
 
 # RESET PASSWORD
 
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)

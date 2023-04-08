@@ -20,3 +20,4 @@ def send_activation_code(user_id):
         recipient_list=[user.email],
         fail_silently=False
     )
+
