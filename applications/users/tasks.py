@@ -20,3 +20,16 @@ def send_activation_code(user_id):
         recipient_list=[user.email],
         fail_silently=False
     )
+
+# @shared_task
+# def send_activation_code(user):
+#     message = f"""
+#     Спасибо за регистрацию! Ваш код активации {user.activation_code}
+#     """
+#     send_mail(
+#         subject='Активация ',
+#         message=message, 
+#         from_email=settings.EMAIL_HOST_USER,
+#         recipient_list=[user.email],
+#         fail_silently=False
+#     )

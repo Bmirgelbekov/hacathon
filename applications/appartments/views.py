@@ -9,6 +9,7 @@ from .serializers import AppartmentSerializer, AppartmentListSerializer#, Commen
 from .permissions import IsAuthor
 
 from django.views.decorators.cache import  cache_page
+from django.utils.decorators import method_decorator
 
 
 class AppartmentViewSet(ModelViewSet):
@@ -17,6 +18,13 @@ class AppartmentViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['rooms']
 
+    @method_decorator(cache_page(60))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+    
+    @method_decorator(cache_page(60))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
