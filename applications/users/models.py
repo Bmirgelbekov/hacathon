@@ -56,14 +56,16 @@ class CustomUser(AbstractBaseUser):
 
 
 @receiver(reset_password_token_created)
-def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
+def password_reset_token_created(
+    sender, instance, reset_password_token, *args, **kwargs
+    ):
 
     message = "Перейдите по ссылке чтобы восстановить пароль  -  localhost:8000{}confirm/ \n Ваш токен = {}".format( reverse('password_reset:reset-password-request'), reset_password_token.key)
 
     send_mail(
-        # title:
-        "Восстановление пароля на сайте - {title}".format(title="Nano LaLafo"),
-        # message:
+        # Тема почты:
+        "Восстановление пароля на - {title}".format(title="Nano LaLafo"),
+        # Сообщение:
         message,
         # from:
         "noreply@somehost.local",
@@ -71,4 +73,3 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
         [reset_password_token.user.email]
     )
 
-# email_plaintext_message = "{}?token={}".format(reverse('password_reset:reset-password-request'), reset_password_token.key)
