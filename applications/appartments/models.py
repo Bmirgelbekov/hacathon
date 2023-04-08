@@ -45,6 +45,24 @@ class Appartment(models.Model):
 
 
 
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    # u1 = User.objects.get(id=1)
+    # u1.comments.all()
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+    appartment = models.ForeignKey(Appartment, on_delete=models.CASCADE, related_name='comments')
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+    
+    def __str__(self) -> str:
+        return f'Комментарий от {self.user.username}'
+
 #  ПРОБНЫЙ ВАРИАНТ КОММЕНТАРИЕВ 
 
 # class Comment(models.Model):

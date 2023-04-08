@@ -4,10 +4,11 @@ from rest_framework.response import Response
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 
-from .models import Appartment #, Comment
-from .serializers import AppartmentSerializer, AppartmentListSerializer#, CommentSerializer
+from .models import Appartment, Comment
+from .serializers import AppartmentSerializer, AppartmentListSerializer, CommentSerializer
 from .permissions import IsAuthor
 
+from rest_framework.decorators import action
 from django.views.decorators.cache import  cache_page
 from django.utils.decorators import method_decorator
 
@@ -38,6 +39,39 @@ class AppartmentViewSet(ModelViewSet):
             self.permission_classes = [IsAuthor]
         return super().get_permissions()
     
+    def get_serializer_class(self):
+        if self.action == 'comment':
+            return CommentSerializer
+        return super().get_serializer_class()
+    
+    @action(methods=['POST', 'DELETE'], detail=True)
+    def comment(self, request, pk=None):
+        appartment = self.get_object()
+        # self.get_object() -> Article.objects.get(pk=pk)
+        if request.method == 'POST':
+            serializer = CommentSerializer(data=request.data, context={'request': request})
+            serializer.is_valid(raise_exception=True)
+            serializer.save(user=request.user, appartment=appartment)
+            return Response(serializer.data)
+        return Response({'TODO': 'ДОБАВИТЬ УДАЛЕНИЕ КОММЕНТА'})
+
+
+class CommentViewSet(ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    
+    def get_permissions(self):
+        if self.action == 'create':
+            self.permission_classes = [IsAuthenticated]
+        elif self.action in ['update', 'destroy']:
+            self.permission_classes = [IsAuthor]
+        return super().get_permissions()
+    
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update({'request': self.request})
+        return context
+
 
 # ПРОБНАЯ ВЬЮШКА
 # class CommentViewSet(ModelViewSet):

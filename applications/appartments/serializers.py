@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Appartment #, Comment
+from .models import Appartment, Comment
  
 
 class AppartmentListSerializer(serializers.ListSerializer):
@@ -22,11 +22,18 @@ class AppartmentSerializer(serializers.ModelSerializer):
     
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        # representation['comments'] = CommentSerializer(
-        #     instance.comments.all(), many=True
-        # ).data
+        representation['comments'] = CommentSerializer(instance.comments.all(), many=True).data
         return representation
     
+
+class CommentSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = Comment
+        fields = ('id', 'user', 'appartment', 'text', 'created_at', 'updated_at')
+        read_only_fields = ['appartment']
+
 
 # ПРОБНЫЙ ВАРИАНТ СЕРИАЛАЙЗЕРА
 
