@@ -28,16 +28,14 @@ class AppartmentSerializer(serializers.ModelSerializer):
         return representation
     
 
-class FavoriteApartmentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Appartment
-        fields = '__all__'
-
 
 class FavoritesSerializer(serializers.ModelSerializer):
+    posts = AppartmentListSerializer
+
+    
     class Meta:
         model = Favorites
-        fields = ('user', 'posts')
+        fields = '__all__'
 
 # ПРОБНЫЙ ВАРИАНТ СЕРИАЛАЙЗЕРА
 

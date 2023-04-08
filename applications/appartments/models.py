@@ -6,6 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
 from rest_framework.exceptions import ValidationError
 
+
 # Create your models here.
 User = get_user_model()
 
@@ -49,7 +50,7 @@ class Appartment(models.Model):
 
 class Favorites(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    posts = models.ManyToManyField(Appartment, blank=True)
+    posts = models.ForeignKey(Appartment, blank=True, on_delete=models.CASCADE)
 
     def clean(self):
         if self.posts.count() > settings.MAX_FAVORITES_POSTS:
