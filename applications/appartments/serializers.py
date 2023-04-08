@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Appartment #, Comment
+from .models import Appartment,Favorites #, Comment
  
 
 class AppartmentListSerializer(serializers.ListSerializer):
@@ -27,6 +27,17 @@ class AppartmentSerializer(serializers.ModelSerializer):
         # ).data
         return representation
     
+
+class FavoriteApartmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Appartment
+        fields = '__all__'
+
+
+class FavoritesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Favorites
+        fields = ('user', 'posts')
 
 # ПРОБНЫЙ ВАРИАНТ СЕРИАЛАЙЗЕРА
 
