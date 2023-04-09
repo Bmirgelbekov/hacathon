@@ -25,9 +25,9 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="Blog API",
+      title="Nano LaLafo API",
       default_version='v1',
-      description="API for blog",
+      description="API for application Nano LaLafo",
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="contact@snippets.local"),
       license=openapi.License(name="BSD License"),
@@ -36,8 +36,9 @@ schema_view = get_schema_view(
    permission_classes=[permissions.AllowAny],
 )
 
+# поменять путь свагера
 urlpatterns = [
-    path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('swagger', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('admin/', admin.site.urls),
     path('account/', include('applications.users.urls')),
     path('', include('applications.appartments.urls')),
