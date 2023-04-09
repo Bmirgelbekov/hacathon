@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Appartment, Comment
+from .models import Appartment, Comment, Favorites
  
 
 class AppartmentListSerializer(serializers.ListSerializer):
@@ -38,3 +38,12 @@ class CommentSerializer(serializers.ModelSerializer):
         read_only_fields = ['appartment']
 
 
+# totest
+
+class FavoritesSerializer(serializers.ModelSerializer):
+    posts = AppartmentListSerializer
+
+    
+    class Meta:
+        model = Favorites
+        fields = '__all__'
