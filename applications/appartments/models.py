@@ -85,3 +85,7 @@ class Favorites(models.Model):
     def clean(self):
         if self.posts.count() > settings.MAX_FAVORITES_POSTS:
             raise ValidationError('Favorites limit exceeded.')
+        
+    class Meta:
+        verbose_name = 'Избранное'
+        verbose_name_plural = 'Избранные'
