@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import RegexValidator
 
+from django.conf import settings
+from rest_framework.exceptions import ValidationError
+
+
 # Create your models here.
 User = get_user_model()
 
@@ -72,3 +76,12 @@ class Comment(models.Model):
         return f'Комментарий от {self.user.username}'
 
 
+# totest
+
+class Favorites(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    posts = models.ForeignKey(Appartment, blank=True, on_delete=models.CASCADE)
+
+    def clean(self):
+        if self.posts.count() > settings.MAX_FAVORITES_POSTS:
+            raise ValidationError('Favorites limit exceeded.')
