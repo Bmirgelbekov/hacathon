@@ -46,11 +46,10 @@ class Appartment(models.Model):
     class Meta:
         verbose_name = 'Квартира'
         verbose_name_plural = 'Квартиры'
-        ordering = ['created_at']
+        ordering = ['created_atfrom django.shortcuts import render, redirect']
 
     def __str__(self) -> str:
         return self.title
-
 
 
 class Comment(models.Model):
